@@ -1,0 +1,19 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore Jupyter Notebook checkpoints (in case you use notebooks later)
+.ipynb_checkpoints/
+
+# Ignore virtual environments (if you create one)
+venv/
+env/
+
+# Ignore plot images folder
+plots/
+
+# Ignore system files
+.DS_Store
+
+# Ignore any environment config files
+.env
