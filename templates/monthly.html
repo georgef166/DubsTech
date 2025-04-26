@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Monthly Analysis Report</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+{% include 'navbar.html' %}
+  <div class="container mt-4">
+    <h1>Monthly Analysis Report</h1>
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="month-select" class="form-label">Month</label>
+        <select class="form-select" id="month-select"></select>
+      </div>
+      <div class="col-md-3">
+        <label for="year-select" class="form-label">Year</label>
+        <select class="form-select" id="year-select"></select>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-12 mb-3">
+        <div class="btn-group" role="group" id="report-btn-group">
+          <button class="btn btn-primary report-btn" data-type="top_products_qty">Top Products (Qty)</button>
+          <button class="btn btn-primary report-btn" data-type="least_products_qty">Least Products (Qty)</button>
+          <button class="btn btn-primary report-btn" data-type="top_products_revenue">Top Products (Revenue)</button>
+          <button class="btn btn-primary report-btn" data-type="least_products_revenue">Least Products (Revenue)</button>
+          <button class="btn btn-primary report-btn" data-type="top_customers">Top Customers</button>
+          <button class="btn btn-primary report-btn" data-type="popular_days">Popular Days</button>
+          <button class="btn btn-primary report-btn" data-type="popular_times_by_day">Popular Times by Day</button>
+          <button class="btn btn-primary report-btn" data-type="top_regions">Top Regions</button>
+          <button class="btn btn-primary report-btn" data-type="summary_stats">Summary Stats</button>
+          <button class="btn btn-primary report-btn" data-type="revenue_suggestions">Revenue Suggestions</button>
+        </div>
+      </div>
+    </div>
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/monthly.js"></script>
+    <div id="popup" class="modal" tabindex="-1" style="display:none;">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Report Info</h5>
+            <button type="button" class="btn-close" id="closePopup"></button>
+          </div>
+          <div class="modal-body" id="popup-content">
+            <!-- Data will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3 class="mt-4">Monthly Report Chart</h3>
+    <div id="report-plot" style="width: 100%; min-height: 500px;"></div>
+    <div id="plot-warning" class="alert alert-warning mt-2" style="display: none;"></div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <a href="/" class="btn btn-secondary mt-4">Back to Home</a>
+  </div>
+  <!-- Inline script removed; logic is in static/js/monthly.js -->
+</body>
+</html>

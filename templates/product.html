@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Report</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+{% include 'navbar.html' %}
+  <div class="container mt-4">
+    <h1>Product Report</h1>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="product-select" class="form-label">Product</label>
+        <select class="form-select" id="product-select"></select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 mb-3">
+        <div class="btn-group" role="group" id="product-btn-group">
+          <button class="btn btn-primary product-btn" data-file="WHITE HANGING HEART T-LIGHT HOLDER_qty_by_country.csv">Qty by Country</button>
+          <button class="btn btn-primary product-btn" data-file="WHITE HANGING HEART T-LIGHT HOLDER_qty_by_month.csv">Qty by Month</button>
+          <button class="btn btn-primary product-btn" data-file="WHITE HANGING HEART T-LIGHT HOLDER_qty_by_hour.csv">Qty by Hour</button>
+          <button class="btn btn-primary product-btn" data-file="WHITE HANGING HEART T-LIGHT HOLDER_qty_by_dayofweek.csv">Qty by Day of Week</button>
+          <button class="btn btn-primary product-btn" data-file="WHITE HANGING HEART T-LIGHT HOLDER_summary.txt">Summary</button>
+        </div>
+      </div>
+    </div>
+    <div id="popup" class="modal" tabindex="-1" style="display:none;">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Product Info</h5>
+            <button type="button" class="btn-close" id="closePopup"></button>
+          </div>
+          <div class="modal-body" id="popup-content">
+            <!-- Data will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3 class="mt-4">Product Report Chart</h3>
+    <div id="report-plot" style="width: 100%; min-height: 500px;"></div>
+    <div id="plot-warning" class="alert alert-warning mt-2" style="display: none;"></div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/product.js"></script>
+    <a href="/" class="btn btn-secondary mt-4">Back to Home</a>
+  </div>
+ </body>
+ </html>

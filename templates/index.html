@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid for Landing Pages</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/css/design.css') }}">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('monthly') }}">Monthly Analysis</a></li>
+            <li><a href="{{ url_for('geographical') }}">Geographical Analysis</a></li>
+            <li><a href="{{ url_for('product') }}">Product Analysis</a></li>
+        </ul>
+    </nav>
+    <div class="featured">
+    </div>
+    <div class="featuredText">
+        <h1>Welcome to Modecraft's Retail Acceleration Project</h1>
+        <p>As a leading ecommerce store offering household essentials to a global audience, Modecraft has processed over 500,000 orders worldwide. Tasked with uncovering actionable insights, we dive into Modecraft’s operational and marketing data to identify key opportunities for growth. Our goal is to deliver strategic, data-driven recommendations that will strengthen Modecraft’s revenue streams and drive success in the year ahead.</p>
+    </div>
+    <div class="grid">
+        <a href="{{ url_for('monthly') }}" class="cell col3">
+            <img src="{{ url_for('static', filename='js/images/col3_1.gif') }}" class="fixed-size" alt="Monthly Analysis">
+            <div class="overlay-text">Monthly Analysis</div>
+        </a>
+        <a href="{{ url_for('geographical') }}" class="cell col3">
+            <img src="{{ url_for('static', filename='js/images/col3_2.gif') }}" class="fixed-size" alt="Geographical Analysis">
+            <div class="overlay-text">Geographical Analysis</div>
+        </a>
+        <a href="{{ url_for('product') }}" class="cell col3">
+            <img src="{{ url_for('static', filename='js/images/col3_3.gif') }}" class="fixed-size" alt="Product Analysis">
+            <div class="overlay-text">Product Analysis</div>
+        </a>
+    </div>
+</body>
+</html>

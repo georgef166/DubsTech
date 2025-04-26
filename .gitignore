@@ -10,7 +10,9 @@ venv/
 env/
 
 # Ignore plot images folder
-plots/
+productreports/
+monthlyanalysisreports/
+geographical/
 
 # Ignore system files
 .DS_Store

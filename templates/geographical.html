@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Geographical Analysis</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+{% include 'navbar.html' %}
+  <div class="container mt-4">
+    <h1>Geographical Analysis</h1>
+    <h3 class="mt-4">Top-Performing Regions</h3>
+    <table class="table table-bordered">
+      <thead><tr><th>Country</th><th>Total Sales</th><th>Rank</th></tr></thead>
+      <tbody>
+        {% for row in top_regions %}
+        <tr><td>{{ row['Description'] }}</td><td>{{ row['Value'] }}</td><td>{{ row['Rank'] }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <h3 class="mt-4">Potential Areas for Expansion</h3>
+    <table class="table table-bordered">
+      <thead><tr><th>Country</th><th>Total Sales</th><th>Rank</th></tr></thead>
+      <tbody>
+        {% for row in expansion %}
+        <tr><td>{{ row['Description'] }}</td><td>{{ row['Value'] }}</td><td>{{ row['Rank'] }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <h3 class="mt-4">Interactive Region Chart</h3>
+    <div id="geo-plot" style="width: 100%; min-height: 500px;"></div>
+    <div id="geo-plot-warning" class="alert alert-warning mt-2" style="display: none;"></div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+      // Prepare data from top_regions
+      // Use a JSON string to avoid IDE lint errors and parse in JS
+      const topRegions = JSON.parse('{{ top_regions|tojson|safe }}');
+      if(Array.isArray(topRegions) && topRegions.length > 0) {
+        // Find first two numeric columns
+        const keys = Object.keys(topRegions[0]);
+        let xKey = null, yKey = null;
+        for(let i=0; i<keys.length; ++i) {
+          if(!isNaN(Number(topRegions[0][keys[i]]))) {
+            if(!xKey) xKey = keys[i];
+            else if(!yKey) { yKey = keys[i]; break; }
+          }
+        }
+        if(xKey && yKey) {
+          const x = topRegions.map(r => r[xKey]);
+          const y = topRegions.map(r => r[yKey]);
+          const trace = { x: x, y: y, mode: 'markers+text', type: 'scatter', text: topRegions.map(r => r.Description || r.Country || ''), marker: {color: '#007bff'}, textposition: 'top center' };
+          const layout = { title: `${xKey} vs ${yKey}`, xaxis: {title: xKey}, yaxis: {title: yKey}, autosize: true };
+          Plotly.newPlot('geo-plot', [trace], layout, {responsive: true});
+          document.getElementById('geo-plot-warning').style.display = 'none';
+        } else {
+          Plotly.purge('geo-plot');
+          document.getElementById('geo-plot-warning').innerText = 'Not enough numeric columns to plot.';
+          document.getElementById('geo-plot-warning').style.display = '';
+        }
+      } else {
+        Plotly.purge('geo-plot');
+        document.getElementById('geo-plot-warning').innerText = 'No data available.';
+        document.getElementById('geo-plot-warning').style.display = '';
+      }
+    </script>
+    <a href="/" class="btn btn-secondary mt-4">Back to Home</a>
+  </div>
+</body>
+</html>
