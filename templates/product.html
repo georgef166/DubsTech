@@ -2,13 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Report</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='js/css/design.css') }}">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-{% include 'navbar.html' %}
-  <div class="container mt-4">
+<body>
+  {% include 'navbar.html' %}
+  <div class="featured"></div>
+  <div class="featuredText">
     <h1>Product Report</h1>
+    <p>Analyze product performance across regions, time, and summary insights.</p>
+  </div>
+  <div class="container mt-4">
     <div class="row mb-3">
       <div class="col-md-6">
         <label for="product-select" class="form-label">Product</label>
@@ -43,9 +50,9 @@
     <div id="report-plot" style="width: 100%; min-height: 500px;"></div>
     <div id="plot-warning" class="alert alert-warning mt-2" style="display: none;"></div>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="/static/js/common.js"></script>
-    <script src="/static/js/product.js"></script>
-    <a href="/" class="btn btn-secondary mt-4">Back to Home</a>
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/product.js') }}"></script>
+    <a href="{{ url_for('home') }}" class="btn btn-secondary mt-4">Back to Home</a>
   </div>
- </body>
- </html>
+</body>
+</html>
