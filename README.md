@@ -89,7 +89,7 @@ Dark mode is available across all pages for easier viewing in low-light environm
 - 📊 Interactive Visualizations: View trends by month, region, and product.
 - 🌙 Dark Mode Toggle: Switch between light and dark themes seamlessly.
 - 📍 Geographical Insights: Explore city-wise and regional sales data.
-- -🛍️ Product Analytics: Identify top-selling items and product trends.
+- 🛍️ Product Analytics: Identify top-selling items and product trends.
 - 📄 Custom Report Generation: Select graphs to generate reports or export a complete PDF report.
 - ⚡ Responsive Design: Optimized for both desktop and mobile viewing.
 - 🧩 Modular Codebase: Easy to extend and maintain.
