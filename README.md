@@ -16,26 +16,17 @@ It offers insights into monthly trends, geographical patterns, and product popul
 
 ### Installation
 
-```bash
+```
 # Clone the repository
  git clone https://github.com/georgef166/DubsTech.git
  cd DubsTech
-
-# Install dependencies (if applicable)
-# For Node.js projects:
- npm install
-# For Python projects:
  pip install -r requirements.txt
 ```
 
 ### Running the Application
 
-```bash
-# If using a simple HTTP server:
- python3 -m http.server 8000 --directory .
-# If using Flask:
- export FLASK_APP=app.py
- flask run
+```
+ python3 app.py
 ```
 
 Open your browser and navigate to `http://localhost:5000` (http://127.0.0.1:5000 or appropriate).
