@@ -214,4 +214,22 @@ def product_options():
     return jsonify({'products': []})
 
 if __name__ == '__main__':
+    # ensure required output folders exist
+    import os
+    for d in ['monthlyanalysisreports', 'geographical', 'productreports']:
+        os.makedirs(d, exist_ok=True)
+    # generate initial geographical CSVs
+    from geographical import geographical_analysis
+    geographical_analysis('Mode_Craft_Ecommerce_Data - Online_Retail.csv')
+    # generate initial monthly analysis reports for default year/month
+    from monthlyanalysisreport import generate_monthly_analysis
+    generate_monthly_analysis('Mode_Craft_Ecommerce_Data - Online_Retail.csv', 2011, 'December')
+    # generate initial product report for first available product
+    from productreport import product_report
+    try:
+        df_desc = pd.read_csv('Mode_Craft_Ecommerce_Data - Online_Retail.csv', usecols=['Description'], encoding='ISO-8859-1', low_memory=False)
+        first_prod = df_desc['Description'].dropna().iloc[0]
+        product_report('Mode_Craft_Ecommerce_Data - Online_Retail.csv', first_prod)
+    except Exception:
+        pass
     app.run(debug=True)
