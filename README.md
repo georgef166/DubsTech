@@ -40,29 +40,45 @@ Open your browser and navigate to `http://localhost:8000` (or as appropriate).
 ## Pages
 
 ### Index Page
-Description of the index page.
+Landing page of our Data Visualization webapp.
 
-![Index Page Screenshot](screenshots/index.png)
+![Index Page Screenshot](readmeimages/homepage.png)
 
 ### Monthly Page
 Description of the monthly page.
 
-![Monthly Page Screenshot](screenshots/monthly.png)
+![Monthly Page Screenshot](readmeimages/monthlyanalysis.png)
 
 ### Geographical Page
 Description of the geographical page.
 
-![Geographical Page Screenshot](screenshots/geographical.png)
+![Geographical Page Screenshot](readmeimages/geographicalanalysis.png)
 
 ### Product Page
 Description of the product page.
 
-![Product Page Screenshot](screenshots/product.png)
+![Product Page Screenshot](readmeimages/productanalysis.png)
 
-## Contributing
 
-Guidelines for contributing to the project.
+## Dark Mode & App Usage
+### Index Page
+Landing page of our Data Visualization webapp.
 
-## License
+![Index Page Screenshot](readmeimages/darkhome.png)
 
-Specify your license here.
+### Monthly Page
+Description of the monthly page.
+
+![Monthly Page Screenshot](readmeimages/darkmonthly.png)
+
+### Geographical Page
+Description of the geographical page.
+
+![Geographical Page Screenshot](readmeimages/darkgeographical.png)
+
+### Product Page
+Description of the product page.
+
+![Product Page Screenshot](readmeimages/darkproduct.png)
+
+
