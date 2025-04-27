@@ -21,7 +21,7 @@
     .nav-right{display:flex;gap:14px;}
     .button-login,.button-signup{padding:10px 20px;border-radius:6px;font-size:14px;font-weight:500;color:#FFF;text-decoration:none;display:flex;align-items:center;justify-content:center;}
     .button-login{background:var(--btn-light-bg);} .button-signup{background:var(--btn-dark-bg);}
-    .hero-image{margin-top:84px;width:100%;height:445px;background:url("{{ url_for('static', filename='js/images/modecraft.gif') }}") center/cover no-repeat;}
+    .hero-image{margin-top:84px;width:100%;height:445px;background: url("{{ url_for('static', filename='js/images/modecraft.gif') }}") center / cover no-repeat;}
     .welcome-text{margin:40px auto;max-width:1396px;text-align:center;color:var(--text);font-size:30px;font-weight:700;line-height:41px;}
     .welcome-text span{font-weight:400;}
   </style>
@@ -51,7 +51,7 @@
   </div>
   <div class="container mt-4">
     <h3 class="mt-4">Top-Performing Regions</h3>
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="background: url('{{ url_for('static', filename='js/images/geographical_01.png') }}') center / cover no-repeat;">
       <thead><tr><th>Country</th><th>Total Sales</th><th>Rank</th></tr></thead>
       <tbody>
         {% for row in top_regions %}
@@ -60,7 +60,7 @@
       </tbody>
     </table>
     <h3 class="mt-4">Potential Areas for Expansion</h3>
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="background: url('{{ url_for('static', filename='js/images/geographical_02.png') }}') center / cover no-repeat;">
       <thead><tr><th>Country</th><th>Total Sales</th><th>Rank</th></tr></thead>
       <tbody>
         {% for row in expansion %}

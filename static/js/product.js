@@ -42,21 +42,18 @@ $(function(){
     $.get(url, function(data){ renderData(data); })
       .fail(function(xhr){
         if(xhr.status === 404){
-          showPopup('<div class="alert alert-danger">No report exists for this product/report type.<br><button id="generate-report" class="btn btn-warning mt-2">Generate Report</button></div>');
-          $(document).off('click', '#generate-report').on('click', '#generate-report', function(){
-            showPopup('<div class="alert alert-info">Generating report, please wait...</div>');
-            $.ajax({
-              url: '/api/product/generate',
-              method: 'POST',
-              contentType: 'application/json',
-              data: JSON.stringify({product: selectedProduct}),
-              success: function(){
-                // auto-fetch the report after generation
-                $.get(url, function(data){ renderData(data); })
-                  .fail(function(){ showPopup('<div class="alert alert-danger">Still no report available. Please try again later.</div>'); });
-              },
-              error: function(xhr){ showPopup('<div class="alert alert-danger">Failed to generate report: ' + xhr.responseText + '</div>'); }
-            });
+          showPopup('<div class="alert alert-info">Generating report, please wait...</div>');
+          $.ajax({
+            url: '/api/product/generate',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({product: selectedProduct}),
+            success: function(){
+              // auto-fetch the report after generation
+              $.get(url, function(data){ renderData(data); })
+                .fail(function(){ showPopup('<div class="alert alert-danger">Still no report available. Please try again later.</div>'); });
+            },
+            error: function(xhr){ showPopup('<div class="alert alert-danger">Failed to generate report: ' + xhr.responseText + '</div>'); }
           });
         } else {
           showPopup('<div class="alert alert-danger">Error fetching report.</div>');
