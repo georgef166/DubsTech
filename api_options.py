@@ -21,7 +21,7 @@ def monthly_options():
 
 @app.route('/api/products/options')
 def product_options():
-    # Scan main data for unique products
+    # Scan main data for unique products!
     df = pd.read_csv('Mode_Craft_Ecommerce_Data - Online_Retail.csv')
     products = sorted(df['Description'].dropna().unique().tolist())
     return jsonify({'products': products})
