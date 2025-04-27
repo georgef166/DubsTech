@@ -19,8 +19,8 @@ def save_to_csv(df, filename, metric_name, rank_column=True):
         # Ensure 'Description' and 'Value' columns exist
         if 'Description' not in df.columns or 'Value' not in df.columns:
             df = df.rename(columns={df.columns[0]: 'Description', df.columns[1]: 'Value'})
-        df['Metric'] = metric_name
-        df['Rank'] = df['Value'].rank(ascending=False, method='min').astype(int)
+        df.loc[:, 'Metric'] = metric_name
+        df.loc[:, 'Rank'] = df['Value'].rank(ascending=False, method='min').astype(int)
         df = df[['Description', 'Metric', 'Value', 'Rank']]
     else:
         # For non-ranked data (e.g., customers, days, hours, regions)
@@ -28,8 +28,8 @@ def save_to_csv(df, filename, metric_name, rank_column=True):
             df = df.reset_index().rename(columns={df.index.name: 'Description'})
         if 'Value' not in df.columns:
             df = df.rename(columns={df.columns[1]: 'Value'})
-        df['Metric'] = metric_name
-        df['Rank'] = df['Value'].rank(ascending=False, method='min').astype(int)
+        df.loc[:, 'Metric'] = metric_name
+        df.loc[:, 'Rank'] = df['Value'].rank(ascending=False, method='min').astype(int)
         df = df[['Description', 'Metric', 'Value', 'Rank']]
     
     df.to_csv(filename, index=False)
