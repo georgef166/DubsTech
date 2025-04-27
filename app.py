@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, jsonify
 import os
 import pandas as pd
+import re
+import subprocess
+
 
 app = Flask(__name__)
 
@@ -11,6 +14,31 @@ def load_csv(filepath):
     else:
         return pd.DataFrame()
 
+
+def is_valid_product(desc):
+    if not isinstance(desc, str):
+        return False
+    desc = desc.strip()
+    if not desc or len(desc) < 4:
+        return False
+    # Only numbers
+    if re.fullmatch(r'\d+', desc):
+        return False
+    # Only special characters
+    if re.fullmatch(r'[\W_]+', desc):
+        return False
+    # Known junk/bad patterns (expand as needed)
+    bad_patterns = [
+        'wrongly marked', 'test', 'unknown', '?', 'damaged', 'sample', 'fee', 'charge',
+        'manual', 'bank', 'adjust', 'dotcom', 'postage', 'amazon'
+    ]
+    for pat in bad_patterns:
+        if pat in desc.lower():
+            return False
+    # Remove entries that are all uppercase and not a typical product (likely fees)
+    if desc.isupper() and len(desc.split()) <= 3:
+        return False
+    return True
 
 @app.route('/')
 def home():
@@ -122,8 +150,8 @@ def api_product_report(product_file):
     if not os.path.exists(filepath):
         try:
             # extract product name (before suffix)
-            product_name = product_file.rsplit('_', 3)[0]
-            subprocess.run(['python3', 'productreport.py', product_name], check=True)
+            safe_product_name = product_file.rsplit('_', 3)[0]
+            subprocess.run(['python', 'productreport.py', sanitized_product], check=True)
         except Exception:
             return jsonify({'error': 'Failed to generate report'}), 404
         if not os.path.exists(filepath):
@@ -134,6 +162,10 @@ def api_product_report(product_file):
     else:
         with open(filepath, 'r') as f:
             return jsonify({'text': f.read()})
+        
+def sanitize_filename(name):
+    # Remove all characters not allowed in Windows filenames
+    return re.sub(r'[<>:"/\\|?*]', '', name)
 
 from flask import request
 import subprocess
@@ -142,21 +174,44 @@ def generate_product_report():
     product = request.json.get('product')
     if not product:
         return jsonify({'error': 'No product specified'}), 400
+    sanitized_product = sanitize_filename(product)  # <-- sanitize here!
+    
     # Call productreport.py as a subprocess
     try:
-        subprocess.run(['python3', 'productreport.py', product], check=True)
-        return jsonify({'status': 'Report generation started'}), 200
+        result = subprocess.run(
+            ['python', 'productreport.py', sanitized_product],
+            capture_output=True,
+            text = True)
+        print("STDOUT:", result.stdout)
+        print("STDERR:", result.stderr)
+        print("Return code:", result.returncode)
+
+        if result.returncode == 0:
+            return jsonify({'status': 'Report generation started'}), 200
+        else:
+            return jsonify({
+                'error': 'Subprocess failed',
+                'stdout': result.stdout,
+                'stderr': result.stderr,
+                'returncode': result.returncode
+            }), 500
+        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/products/options')
 def product_options():
     data_file = 'Mode_Craft_Ecommerce_Data - Online_Retail.csv'
-    products = []
     if os.path.exists(data_file):
         df = pd.read_csv(data_file)
-        products = sorted(df['Description'].dropna().unique().tolist())
-    return jsonify({'products': products})
+        raw_products = df['Description'].dropna().map(str.strip)
+        freq = raw_products.value_counts()
+        common_products = freq[freq >= 5].index
+        filtered_products = sorted(set(
+            p for p in raw_products if p in common_products and is_valid_product(p)
+        ))
+        return jsonify({'products': filtered_products})
+    return jsonify({'products': []})
 
 if __name__ == '__main__':
     app.run(debug=True)
