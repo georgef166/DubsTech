@@ -6,11 +6,14 @@
   <title>Product Report</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&display=swap" rel="stylesheet">
   <style>
     html { overflow-y: scroll; }
     :root { --bg:#FFFFFF; --text:#18191F; --nav-bg:#F5F7FA; --btn-light-bg:rgba(67,205,255,0.45); --btn-dark-bg:#9E96D9; --box-bg:#ddd; --footer-bg:#FFAF65; }
     body.dark-mode { --bg:#1E1E1E; --text:#FAFAFA; --nav-bg:#2E2E2E; --btn-light-bg:#444; --btn-dark-bg:#888; --box-bg:#444; }
-    body{margin:0;padding:0;width:100%;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;}
+    body{margin:0;padding:0;width:100%;background:var(--bg);color:var(--text);font-family: Google Sans Text, Roboto, Arial, sans-serif;}
     .navbar{width:100%;height:84px;background:#F5F7FA;display:flex;justify-content:center;align-items:center;position:fixed;top:0;left:0;z-index:1000;}
     body.dark-mode .navbar{background:#2E2E2E;}
     .navbar-container{width:100%;max-width:1582px;display:flex;justify-content:space-between;align-items:center;padding:0 20px;}
@@ -113,6 +116,16 @@
     <div id="report-plot" style="width: 100%; min-height: 500px;"></div>
     <div id="plot-warning" class="alert alert-warning mt-2" style="display: none;"></div>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+      // Placeholder chart before selection
+      Plotly.newPlot('report-plot', [], {
+        annotations: [{ text: 'Select a report to display', showarrow: false, font: { size: 20 } }],
+        xaxis: { visible: false },
+        yaxis: { visible: false },
+        margin: { l: 0, r: 0, t: 30, b: 0 }
+      }, { responsive: true });
+      document.getElementById('plot-warning').style.display = 'none';
+    </script>
     <script src="{{ url_for('static', filename='js/common.js') }}"></script>
     <script src="{{ url_for('static', filename='js/product.js') }}"></script>
     <script>
