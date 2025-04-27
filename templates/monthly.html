@@ -5,23 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monthly Analysis Report</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     html { overflow-y: scroll; }
-    :root { --bg:#FFFFFF; --text:#18191F; --nav-bg:#F5F7FA; --btn-light-bg:rgba(67,205,255,0.45); --btn-dark-bg:#9E96D9; --box-bg:#ddd; }
-    body.dark-mode { --bg:#1E1E1E; --text:#FAFAFA; --nav-bg:#2E2E2E; --btn-light-bg:#444; --btn-dark-bg:#888; --box-bg:#444; }
-    body.light-mode {}
+    :root { --bg:#FFFFFF; --text:#18191F; --nav-bg:#F5F7FA; --btn-light-bg:rgba(67,205,255,0.45); --btn-dark-bg:#9E96D9; --box-bg:#ddd; --footer-bg:#FFAF65; }
+    body.dark-mode { --bg:#1E1E1E; --text:#FAFAFA; --nav-bg:#2E2E2E; --btn-light-bg:#444; --btn-dark-bg:#888; --box-bg:#444; --footer-bg:#333; }
     body{margin:0;padding:0;width:100%;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;}
-    .navbar{width:100%;height:84px;background:var(--nav-bg);display:flex;justify-content:center;align-items:center;position:fixed;top:0;left:0;z-index:1000;}
+    .navbar{width:100%;height:84px;background:#F5F7FA;display:flex;justify-content:center;align-items:center;position:fixed;top:0;left:0;z-index:1000;}
+    body.dark-mode .navbar{background:#2E2E2E;}
     .navbar-container{width:100%;max-width:1582px;display:flex;justify-content:space-between;align-items:center;padding:0 20px;}
     .nav-left{display:flex;align-items:center;gap:50px;}
-    .nav-logo img{width:211px;height:40px;}
+    .nav-logo img{height:40px;width:auto;}
     .nav-menu{display:flex;gap:30px;}
     .nav-menu-item{font-size:16px;color:var(--text);text-decoration:none;font-weight:400;}
-    .nav-menu-item.active,.nav-menu-item:hover{font-weight:500;}
+    .nav-menu-item.active{font-weight:500;color:#0E8FBE;}
+    .nav-menu-item:hover{font-weight:500;}
     .nav-right{display:flex;gap:14px;}
-    .button-login,.button-signup{padding:10px 20px;border-radius:6px;font-size:14px;font-weight:500;color:#FFF;text-decoration:none;display:flex;align-items:center;justify-content:center;}
     .button-login{background:var(--btn-light-bg);} .button-signup{background:var(--btn-dark-bg);}
+    .theme-toggle { background: none; border: none; font-size: 1.5rem; color: #0E8FBE; cursor: pointer; }
+    body.dark-mode .theme-toggle { color: #0E8FBE; }
     .hero-image{margin-top:84px;width:100%;height:445px;background:url("{{ url_for('static', filename='js/images/modecraft.gif') }}") center/cover no-repeat;}
     .welcome-text{margin:40px auto;max-width:1396px;text-align:center;color:var(--text);font-size:30px;font-weight:700;line-height:41px;}
     .welcome-text span{font-weight:400;}
@@ -29,6 +32,7 @@
     .box-btn{width:calc(33.333% - 20px);height:200px;border-radius:20px;background:none;border:none;font-size:1rem;color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;cursor:pointer;margin:10px;padding-top:10px;padding-bottom:10px;}
     .box-btn img{margin-bottom:4px;}
     .box-btn.full-row{width:calc(100% - 20px);}
+    .footer { width:100%; height:97px; background:var(--footer-bg); margin-top:40px; text-align:center; line-height:97px; }
     /* keep popup text dark on white background in dark mode */
     body.dark-mode #popup .modal-content {
       background-color: #FFFFFF !important;
@@ -44,17 +48,16 @@
   <div class="navbar">
     <div class="navbar-container">
       <div class="nav-left">
-        <div class="nav-logo"><img src="https://via.placeholder.com/211x40" alt="Modecraft Logo"></div>
+        <div class="nav-logo"><img src="{{ url_for('static', filename='js/images/logo.png') }}" alt="Modecraft Logo"></div>
         <div class="nav-menu">
-          <a href="{{ url_for('home') }}" class="nav-menu-item active">Home</a>
-          <a href="{{ url_for('monthly') }}" class="nav-menu-item">Monthly Analysis</a>
+          <a href="{{ url_for('home') }}" class="nav-menu-item">Home</a>
+          <a href="{{ url_for('monthly') }}" class="nav-menu-item active">Monthly Analysis</a>
           <a href="{{ url_for('geographical') }}" class="nav-menu-item">Geographical Analysis</a>
           <a href="{{ url_for('product') }}" class="nav-menu-item">Product Analysis</a>
         </div>
       </div>
       <div class="nav-right">
-        <a href="#" class="button-login">Light</a>
-        <a href="#" class="button-signup">Dark</a>
+        <button id="theme-toggle" class="theme-toggle"><i class="fas fa-sun"></i></button>
       </div>
     </div>
   </div>
@@ -124,11 +127,21 @@
         document.body.classList.add(theme+'-mode');
         localStorage.setItem('theme', theme);
       }
+      function updateToggleIcon(theme) {
+        const toggle = document.getElementById('theme-toggle');
+        toggle.innerHTML = `<i class="fas ${theme==='light'?'fa-sun':'fa-moon'}"></i>`;
+      }
       document.addEventListener('DOMContentLoaded', function() {
         var t = localStorage.getItem('theme') || 'light';
         applyTheme(t);
-        document.querySelector('.button-login').addEventListener('click', function(e){e.preventDefault();applyTheme('light');});
-        document.querySelector('.button-signup').addEventListener('click', function(e){e.preventDefault();applyTheme('dark');});
+        updateToggleIcon(t);
+        const toggleBtn = document.getElementById('theme-toggle');
+        toggleBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const next = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+          applyTheme(next);
+          updateToggleIcon(next);
+        });
       });
     </script>
     <div id="popup" class="modal" tabindex="-1" style="display:none;">
@@ -148,7 +161,7 @@
     <div id="report-plot" style="width: 100%; min-height: 500px;"></div>
     <div id="plot-warning" class="alert alert-warning mt-2" style="display: none;"></div>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <a href="/" class="btn btn-secondary mt-4">Back to Home</a>
   </div>
+  <div class="footer">@ 2025 Boom Analysis</div>
 </body>
 </html>
