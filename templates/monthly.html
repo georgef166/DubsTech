@@ -31,8 +31,8 @@
     .hero-image{margin-top:84px;width:100%;height:445px;background:url("{{ url_for('static', filename='js/images/modecraft.gif') }}") center/cover no-repeat;}
     .welcome-text{margin:40px auto;max-width:1396px;text-align:center;color:var(--text);font-size:30px;font-weight:700;line-height:41px;}
     .welcome-text span{font-weight:400;}
-    .image-row{display:flex;justify-content:space-evenly;align-items:center;flex-wrap:wrap;margin:40px auto;max-width:1582px;}
-    .box-btn{width:calc(33.333% - 20px);height:200px;border-radius:20px;background:none;border:none;font-size:1rem;color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;cursor:pointer;margin:10px;padding-top:10px;padding-bottom:10px;}
+    .image-row{display:flex;justify-content:space-evenly;align-items:center;flex-wrap:wrap;margin:0px auto;max-width:1582px;}
+    .box-btn{width:calc(33.333% - 20px);height:200px;border-radius:20px;background:none;border:none;font-size:1rem;color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;cursor:pointer;margin-top:0px;margin-bottom:60px;margin-left:10px;margin-right:10px;padding-bottom:10px;}
     .box-btn img{margin-bottom:4px;}
     .box-btn.full-row{width:calc(100% - 20px);}
     .footer { width:100%; height:97px; background:var(--footer-bg); margin-top:40px; text-align:center; line-height:97px; }
@@ -44,6 +44,24 @@
     body.dark-mode #popup .modal-content .modal-header,
     body.dark-mode #popup .modal-content .modal-body {
       color: #18191F !important;
+    }
+    /* Modal popup animation styles */
+    #popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 2rem;
+      z-index: 2000;
+    }
+    #popup .modal-dialog {
+      transition: transform 0.3s ease-out;
+      transform-origin: center center;
     }
   </style>
 </head>
@@ -67,7 +85,7 @@
   <div class="hero-image"></div>
   <div class="welcome-text">
     <h1>Monthly Analysis Report</h1>
-    <span>Analyze monthly sales trends and statistics for informed decision-making.</span>
+    <h3>Analyzing monthly sales trends and statistics for informed decision-making</h3>
   </div>
   <div class="container mt-4">
     <div class="row mb-3">

@@ -113,7 +113,7 @@
             background: url("{{ url_for('static', filename='js/images/modecraft.gif') }}") center/cover no-repeat;
         }
         .welcome-text {
-            margin: 40px auto;
+            margin: 40px 300px;
             max-width: 1396px;
             text-align: center;
             color: var(--text);
@@ -121,7 +121,18 @@
             font-weight: 700;
             line-height: 41px;
         }
-        .welcome-text span { font-weight: 400; }
+        .welcome-text p {
+            text-align: center;
+            color: var(--text);
+            font-size: 25px;
+            font-weight: 400;
+        }
+        .welcome-text span {
+            font-weight: 100;
+            font-size:25px;
+            margin:10px;
+            padding: 40px;
+        }
         .image-row {
             display: flex;
             justify-content: space-evenly;
@@ -208,10 +219,10 @@
     <div class="hero-image"></div>
 
     <div class="welcome-text">
-        Welcome to Modecraft's Retail Acceleration Project<br><br>
-        <span>
+        Welcome to Modecraft's Retail Acceleration Project<br>
+        <p>
             As a leading ecommerce store offering household essentials to a global audience, Modecraft has processed over 500,000 orders worldwide. Tasked with uncovering actionable insights, we dive into Modecraft’s operational and marketing data to identify key opportunities for growth. Our goal is to deliver strategic, data-driven recommendations that will strengthen Modecraft’s revenue streams and drive success in the year ahead.
-        </span>
+        </p>
     </div>
 
     <div class="image-row">

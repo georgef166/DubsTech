@@ -37,6 +37,8 @@ $(function(){
   }
 
   function onBtnClick(){
+    // record popup origin for animation
+    window._lastPopupSource = this;
     const url = $(this).data('url');
     showPopup('<div class="alert alert-info">Loading...</div>');
     $.get(url, function(data){ renderData(data); })
