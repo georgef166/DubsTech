@@ -1,7 +1,7 @@
 $(function(){
   let selectedMonth, selectedYear, validOptions = [];
   const $month = $('#month-select'), $year = $('#year-select');
-  const $btns = $('#report-btn-group .report-btn');
+  const $btns = $('.box-btn.report-btn');
   const $warning = $('#plot-warning');
 
   function loadOptions(){
@@ -27,7 +27,7 @@ $(function(){
       const type = $(this).data('type');
       $(this).data('url', `/api/monthly/${type}?month=${encodeURIComponent(selectedMonth)}&year=${encodeURIComponent(selectedYear)}`);
     });
-    $btns.first().click();
+    // initial click removed to avoid auto-popup on load
   }
 
   function onBtnClick(){

@@ -2,7 +2,7 @@ $(function(){
   attachClose();
   let selectedProduct, products=[];
   const $select = $('#product-select');
-  const $btns = $('#product-btn-group .product-btn');
+  const $btns = $('.box-btn.product-btn');
   const $warning = $('#plot-warning');
 
   function init(){
@@ -33,7 +33,7 @@ $(function(){
       const url = `/api/product/${encodeURIComponent(file)}`;
       $(this).data('url', url);
     });
-    $btns.first().click();
+    // initial click removed to avoid auto-popup on load
   }
 
   function onBtnClick(){

@@ -1,41 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Grid for Landing Pages</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='js/css/design.css') }}">
+    <title>Modecraft - Retail Acceleration Project</title>
+    <style>
+        html { overflow-y: scroll; }
+        /* Inline CSS inspired by inspoindex.html */
+        :root {
+            --bg: #FFFFFF;
+            --text: #18191F;
+            --nav-bg: #F5F7FA;
+            --btn-light-bg: rgba(67,205,255,0.45);
+            --btn-dark-bg: #9E96D9;
+            --box-bg: #ddd;
+            --footer-bg: #FFAF65;
+        }
+        body.dark-mode {
+            --bg: #1E1E1E;
+            --text: #FAFAFA;
+            --nav-bg: #2E2E2E;
+            --btn-light-bg: #444;
+            --btn-dark-bg: #888;
+            --box-bg: #444;
+            --footer-bg: #333;
+        }
+        body.light-mode {}
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+        }
+        .navbar {
+            width: 100%;
+            height: 84px;
+            background: var(--nav-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .navbar-container {
+            width: 100%;
+            max-width: 1582px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        .nav-logo img {
+            width: 211px;
+            height: 40px;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-menu-item {
+            font-size: 16px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 400;
+        }
+        .nav-menu-item.active,
+        .nav-menu-item:hover {
+            font-weight: 500;
+        }
+        .nav-right {
+            display: flex;
+            gap: 14px;
+        }
+        .button-login,
+        .button-signup {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #FFFFFF;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .button-login { background: var(--btn-light-bg); }
+        .button-signup { background: var(--btn-dark-bg); }
+        .hero-image {
+            margin-top: 84px;
+            width: 100%;
+            height: 445px;
+            background: url("{{ url_for('static', filename='js/images/modecraft.gif') }}") center/cover no-repeat;
+        }
+        .welcome-text {
+            margin: 40px auto;
+            max-width: 1396px;
+            text-align: center;
+            color: var(--text);
+            font-size: 30px;
+            font-weight: 700;
+            line-height: 41px;
+        }
+        .welcome-text span { font-weight: 400; }
+        .image-row {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin: 40px auto;
+            max-width: 1582px;
+        }
+        .image-box {
+            width: 444px;
+            height: 444px;
+            border-radius: 96px;
+            overflow: hidden;
+        }
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .footer {
+            width: 100%;
+            height: 97px;
+            background: var(--footer-bg);
+            margin-top: 40px;
+        }
+    </style>
 </head>
-
 <body>
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('monthly') }}">Monthly Analysis</a></li>
-            <li><a href="{{ url_for('geographical') }}">Geographical Analysis</a></li>
-            <li><a href="{{ url_for('product') }}">Product Analysis</a></li>
-        </ul>
-    </nav>
-    <div class="featured">
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="nav-left">
+                <div class="nav-logo">
+                    <img src="https://via.placeholder.com/211x40" alt="Modecraft Logo">
+                </div>
+                <div class="nav-menu">
+                    <a href="{{ url_for('home') }}" class="nav-menu-item active">Home</a>
+                    <a href="{{ url_for('monthly') }}" class="nav-menu-item">Monthly Analysis</a>
+                    <a href="{{ url_for('geographical') }}" class="nav-menu-item">Geographical Analysis</a>
+                    <a href="{{ url_for('product') }}" class="nav-menu-item">Product Analysis</a>
+                </div>
+            </div>
+            <div class="nav-right">
+                <a href="#" class="button-login">Light</a>
+                <a href="#" class="button-signup">Dark</a>
+            </div>
+        </div>
     </div>
-    <div class="featuredText">
-        <h1>Welcome to Modecraft's Retail Acceleration Project</h1>
-        <p>As a leading ecommerce store offering household essentials to a global audience, Modecraft has processed over 500,000 orders worldwide. Tasked with uncovering actionable insights, we dive into Modecraft’s operational and marketing data to identify key opportunities for growth. Our goal is to deliver strategic, data-driven recommendations that will strengthen Modecraft’s revenue streams and drive success in the year ahead.</p>
+
+    <div class="hero-image"></div>
+
+    <div class="welcome-text">
+        Welcome to Modecraft's Retail Acceleration Project<br><br>
+        <span>
+            As a leading ecommerce store offering household essentials to a global audience, Modecraft has processed over 500,000 orders worldwide. Tasked with uncovering actionable insights, we dive into Modecraft’s operational and marketing data to identify key opportunities for growth. Our goal is to deliver strategic, data-driven recommendations that will strengthen Modecraft’s revenue streams and drive success in the year ahead.
+        </span>
     </div>
-    <div class="grid">
-        <a href="{{ url_for('monthly') }}" class="cell col3">
-            <img src="{{ url_for('static', filename='js/images/col3_1.gif') }}" class="fixed-size" alt="Monthly Analysis">
-            <div class="overlay-text">Monthly Analysis</div>
-        </a>
-        <a href="{{ url_for('geographical') }}" class="cell col3">
-            <img src="{{ url_for('static', filename='js/images/col3_2.gif') }}" class="fixed-size" alt="Geographical Analysis">
-            <div class="overlay-text">Geographical Analysis</div>
-        </a>
-        <a href="{{ url_for('product') }}" class="cell col3">
-            <img src="{{ url_for('static', filename='js/images/col3_3.gif') }}" class="fixed-size" alt="Product Analysis">
-            <div class="overlay-text">Product Analysis</div>
-        </a>
+
+    <div class="image-row">
+        <div class="image-box"><img src="{{ url_for('static', filename='js/images/col3_1.gif') }}" alt="Monthly Analysis"></div>
+        <div class="image-box"><img src="{{ url_for('static', filename='js/images/col3_2.gif') }}" alt="Geographical Analysis"></div>
+        <div class="image-box"><img src="{{ url_for('static', filename='js/images/col3_3.gif') }}" alt="Product Analysis"></div>
     </div>
+
+    <div class="footer"></div>
+    <script>
+        function applyTheme(theme) {
+            document.body.classList.remove('light-mode', 'dark-mode');
+            document.body.classList.add(theme + '-mode');
+            localStorage.setItem('theme', theme);
+        }
+        function initTheme() {
+            var t = localStorage.getItem('theme') || 'light';
+            applyTheme(t);
+            document.querySelector('.button-login').removeEventListener('click', applyTheme.bind(null, 'light'));
+            document.querySelector('.button-signup').removeEventListener('click', applyTheme.bind(null, 'dark'));
+            document.querySelector('.button-login').addEventListener('click', function(e) { e.preventDefault(); applyTheme('light'); });
+            document.querySelector('.button-signup').addEventListener('click', function(e) { e.preventDefault(); applyTheme('dark'); });
+        }
+        document.addEventListener('DOMContentLoaded', initTheme);
+    </script>
 </body>
 </html>
