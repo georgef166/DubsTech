@@ -18,7 +18,7 @@ It offers insights into monthly trends, geographical patterns, and product popul
 
 ```bash
 # Clone the repository
- git clone https://github.com/your-username/DubsTech.git
+ git clone https://github.com/georgef166/DubsTech.git
  cd DubsTech
 
 # Install dependencies (if applicable)
