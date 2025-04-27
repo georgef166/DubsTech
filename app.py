@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import re
 import subprocess
+import sys
 
 
 app = Flask(__name__)
@@ -151,7 +152,7 @@ def api_product_report(product_file):
         try:
             # extract product name (before suffix)
             safe_product_name = product_file.rsplit('_', 3)[0]
-            subprocess.run(['python', 'productreport.py', sanitized_product], check=True)
+            subprocess.run([sys.executable, 'productreport.py', safe_product_name], check=True)
         except Exception:
             return jsonify({'error': 'Failed to generate report'}), 404
         if not os.path.exists(filepath):
@@ -168,7 +169,6 @@ def sanitize_filename(name):
     return re.sub(r'[<>:"/\\|?*]', '', name)
 
 from flask import request
-import subprocess
 @app.route('/api/product/generate', methods=['POST'])
 def generate_product_report():
     product = request.json.get('product')
@@ -179,7 +179,7 @@ def generate_product_report():
     # Call productreport.py as a subprocess
     try:
         result = subprocess.run(
-            ['python', 'productreport.py', sanitized_product],
+            [sys.executable, 'productreport.py', sanitized_product],
             capture_output=True,
             text = True)
         print("STDOUT:", result.stdout)

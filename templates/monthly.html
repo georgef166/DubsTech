@@ -26,7 +26,8 @@
     .welcome-text{margin:40px auto;max-width:1396px;text-align:center;color:var(--text);font-size:30px;font-weight:700;line-height:41px;}
     .welcome-text span{font-weight:400;}
     .image-row{display:flex;justify-content:space-evenly;align-items:center;flex-wrap:wrap;margin:40px auto;max-width:1582px;}
-    .box-btn{width:calc(33.333% - 20px);height:200px;border-radius:20px;background:var(--box-bg);border:none;font-size:1rem;color:var(--text);display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;margin:10px;}
+    .box-btn{width:calc(33.333% - 20px);height:200px;border-radius:20px;background:none;border:none;font-size:1rem;color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;cursor:pointer;margin:10px;padding-top:10px;padding-bottom:10px;}
+    .box-btn img{margin-bottom:4px;}
     .box-btn.full-row{width:calc(100% - 20px);}
     /* keep popup text dark on white background in dark mode */
     body.dark-mode #popup .modal-content {
@@ -74,16 +75,46 @@
       </div>
     </div>
     <div class="image-row">
-      <button class="box-btn report-btn" data-type="top_products_qty" style="background: url('{{ url_for('static', filename='js/images/monthly_01.png') }}') center/cover no-repeat;">Top Products<br>(Qty)</button>
-      <button class="box-btn report-btn" data-type="least_products_qty" style="background: url('{{ url_for('static', filename='js/images/monthly_02.png') }}') center/cover no-repeat;">Least Products<br>(Qty)</button>
-      <button class="box-btn report-btn" data-type="top_products_revenue" style="background: url('{{ url_for('static', filename='js/images/monthly_03.png') }}') center/cover no-repeat;">Top Products<br>(Revenue)</button>
-      <button class="box-btn report-btn" data-type="least_products_revenue" style="background: url('{{ url_for('static', filename='js/images/monthly_04.png') }}') center/cover no-repeat;">Least Products<br>(Revenue)</button>
-      <button class="box-btn report-btn" data-type="top_customers" style="background: url('{{ url_for('static', filename='js/images/monthly_05.png') }}') center/cover no-repeat;">Top Customers</button>
-      <button class="box-btn report-btn" data-type="popular_days" style="background: url('{{ url_for('static', filename='js/images/monthly_06.png') }}') center/cover no-repeat;">Popular Days</button>
-      <button class="box-btn report-btn" data-type="popular_times_by_day" style="background: url('{{ url_for('static', filename='js/images/monthly_07.png') }}') center/cover no-repeat;">Popular Times by Day</button>
-      <button class="box-btn report-btn" data-type="top_regions" style="background: url('{{ url_for('static', filename='js/images/monthly_08.png') }}') center/cover no-repeat;">Top Regions</button>
-      <button class="box-btn report-btn" data-type="summary_stats" style="background: url('{{ url_for('static', filename='js/images/monthly_09.png') }}') center/cover no-repeat;">Summary<br>Stats</button>
-      <button class="box-btn report-btn full-row" data-type="revenue_suggestions">Revenue<br>Suggestions</button>
+      <button class="box-btn report-btn" data-type="top_products_qty">
+        <img src="{{ url_for('static', filename='js/images/monthly_01.png') }}" alt="Top Products (Qty)" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Top Products<br>(Qty)</span>
+      </button>
+      <button class="box-btn report-btn" data-type="least_products_qty">
+        <img src="{{ url_for('static', filename='js/images/monthly_02.png') }}" alt="Least Products (Qty)" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Least Products<br>(Qty)</span>
+      </button>
+      <button class="box-btn report-btn" data-type="top_products_revenue">
+        <img src="{{ url_for('static', filename='js/images/monthly_03.png') }}" alt="Top Products (Revenue)" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Top Products<br>(Revenue)</span>
+      </button>
+      <button class="box-btn report-btn" data-type="least_products_revenue">
+        <img src="{{ url_for('static', filename='js/images/monthly_04.png') }}" alt="Least Products (Revenue)" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Least Products<br>(Revenue)</span>
+      </button>
+      <button class="box-btn report-btn" data-type="top_customers">
+        <img src="{{ url_for('static', filename='js/images/monthly_05.png') }}" alt="Top Customers" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Top Customers</span>
+      </button>
+      <button class="box-btn report-btn" data-type="popular_days">
+        <img src="{{ url_for('static', filename='js/images/monthly_06.png') }}" alt="Popular Days" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Popular Days</span>
+      </button>
+      <button class="box-btn report-btn" data-type="popular_times_by_day">
+        <img src="{{ url_for('static', filename='js/images/monthly_07.png') }}" alt="Popular Times by Day" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Popular Times by Day</span>
+      </button>
+      <button class="box-btn report-btn" data-type="top_regions">
+        <img src="{{ url_for('static', filename='js/images/monthly_08.png') }}" alt="Top Regions" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Top Regions</span>
+      </button>
+      <button class="box-btn report-btn" data-type="summary_stats">
+        <img src="{{ url_for('static', filename='js/images/monthly_09.png') }}" alt="Summary Stats" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Summary<br>Stats</span>
+      </button>
+      <button class="box-btn report-btn full-row" data-type="revenue_suggestions">
+        <img src="{{ url_for('static', filename='js/images/monthly_10.png') }}" alt="Revenue Suggestions" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Revenue<br>Suggestions</span>
+      </button>
     </div>
     <script src="{{ url_for('static', filename='js/common.js') }}"></script>
     <script src="{{ url_for('static', filename='js/monthly.js') }}"></script>

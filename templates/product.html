@@ -24,7 +24,8 @@
     .welcome-text{margin:40px auto;max-width:1396px;text-align:center;color:var(--text);font-size:30px;font-weight:700;line-height:41px;}
     .welcome-text span{font-weight:400;}
     .image-row{display:flex;justify-content:space-evenly;align-items:center;flex-wrap:wrap;margin:40px auto;max-width:1582px;}
-    .box-btn{width:calc(50% - 20px);height:200px;border-radius:20px;background:var(--box-bg);border:none;font-size:1rem;color:var(--text);display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;margin:10px;}
+    .box-btn{width:calc(50% - 20px);height:200px;border-radius:20px;background:none;border:none;font-size:1rem;color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;cursor:pointer;margin:10px;padding-top:10px;padding-bottom:10px;}
+    .box-btn img{margin-bottom:4px;}
     .box-btn.full-row{width:calc(100% - 20px);}
     /* keep popup text dark on white background in dark mode */
     body.dark-mode #popup .modal-content {
@@ -69,11 +70,26 @@
       </div>
     </div>
     <div class="image-row">
-      <button class="box-btn product-btn" data-file="WHITE HANGING HEART T-LIGHT HOLDER_qty_by_country.csv" style="background: url('{{ url_for('static', filename='js/images/product_01.png') }}') center / cover no-repeat;">Qty by Country</button>
-      <button class="box-btn product-btn" data-file="WHITE HANGING HEART T-LIGHT HOLDER_qty_by_month.csv" style="background: url('{{ url_for('static', filename='js/images/product_02.png') }}') center / cover no-repeat;">Qty by Month</button>
-      <button class="box-btn product-btn" data-file="WHITE HANGING HEART T-LIGHT HOLDER_qty_by_hour.csv" style="background: url('{{ url_for('static', filename='js/images/product_03.png') }}') center / cover no-repeat;">Qty by Hour</button>
-      <button class="box-btn product-btn" data-file="WHITE HANGING HEART T-LIGHT HOLDER_qty_by_dayofweek.csv" style="background: url('{{ url_for('static', filename='js/images/product_04.png') }}') center / cover no-repeat;">Qty by Day of Week</button>
-      <button class="box-btn product-btn full-row" data-file="WHITE HANGING HEART T-LIGHT HOLDER_summary.txt" style="background: url('{{ url_for('static', filename='js/images/product_05.png') }}') center / cover no-repeat;">Summary</button>
+      <button class="box-btn product-btn" data-file="WHITE HANGING HEART T-LIGHT HOLDER_qty_by_country.csv">
+        <img src="{{ url_for('static', filename='js/images/product_01.png') }}" alt="Qty by Country" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Qty by Country</span>
+      </button>
+      <button class="box-btn product-btn" data-file="WHITE HANGING HEART T-LIGHT HOLDER_qty_by_month.csv">
+        <img src="{{ url_for('static', filename='js/images/product_02.png') }}" alt="Qty by Month" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Qty by Month</span>
+      </button>
+      <button class="box-btn product-btn" data-file="WHITE HANGING HEART T-LIGHT HOLDER_qty_by_hour.csv">
+        <img src="{{ url_for('static', filename='js/images/product_03.png') }}" alt="Qty by Hour" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Qty by Hour</span>
+      </button>
+      <button class="box-btn product-btn" data-file="WHITE HANGING HEART T-LIGHT HOLDER_qty_by_dayofweek.csv">
+        <img src="{{ url_for('static', filename='js/images/product_04.png') }}" alt="Qty by Day of Week" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Qty by Day of Week</span>
+      </button>
+      <button class="box-btn product-btn full-row" data-file="WHITE HANGING HEART T-LIGHT HOLDER_summary.txt">
+        <img src="{{ url_for('static', filename='js/images/product_05.png') }}" alt="Summary" style="max-height:60%;width:auto;object-fit:contain;">
+        <span>Summary</span>
+      </button>
     </div>
     <div id="popup" class="modal" tabindex="-1" style="display:none;">
       <div class="modal-dialog modal-lg">
